@@ -1,8 +1,9 @@
+// src/components/Navbar.jsx
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { AppBar, Toolbar, Typography, Button, Box, Container } from '@mui/material';
+import { AppBar, Toolbar, Typography, Box } from '@mui/material';
+import HamburgerMenu from './HamburgerMenu';
 
-const CustomNavbar = () => {
+const Navbar = () => {
   return (
     <AppBar position="static" color="secondary" sx={{ width: '100vw' }}>
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', px: 4 }}>
@@ -10,13 +11,11 @@ const CustomNavbar = () => {
           Study Groups
         </Typography>
         <Box>
-          <Button color="inherit" component={Link} to="/">Home</Button>
-          <Button color="inherit" component={Link} to="/login">Login</Button>
-          <Button color="inherit" component={Link} to="/signup">Sign Up</Button>
+          <HamburgerMenu />
         </Box>
       </Toolbar>
     </AppBar>
   );
 };
 
-export default CustomNavbar;
+export default Navbar;

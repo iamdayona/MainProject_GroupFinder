@@ -13,21 +13,32 @@ import {
   Paper,
   Link as MuiLink,
 } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const navigate = useNavigate();
+  const { login } = useAuth();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('user');
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    alert(`Login clicked for ${role} - Email: ${email}`);
-    // Place axios login logic here
-  };
+ const handleLogin = (e) => {
+  e.preventDefault();
+  console.log("Logging in as:", role);
+  login(email, role);
+
+  if (role === 'admin') {
+    navigate('/admin');
+  } else {
+    navigate('/dashboard');
+  }
+};
+
+
 
   return (
     <Box
@@ -102,7 +113,7 @@ const Login = () => {
 
         {/* Link to Sign Up */}
         <Typography variant="body2" textAlign="center" sx={{ mt: 2 }}>
-          Don't have an account?{' '}
+          Don&apos;t have an account?{' '}
           <MuiLink component={RouterLink} to="/signup" underline="hover">
             Sign Up
           </MuiLink>
